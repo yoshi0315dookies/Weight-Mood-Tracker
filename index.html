@@ -12,7 +12,7 @@ const now=()=>new Date();const localDate=d=>[d.getFullYear(),String(d.getMonth()
 const localTime=d=>[String(d.getHours()).padStart(2,'0'),String(d.getMinutes()).padStart(2,'0')].join(':');
 const stamp=e=>e.date+'T'+e.time;const sorted=()=>[...entries].sort((a,b)=>stamp(a).localeCompare(stamp(b)));
 const dateMs=e=>new Date(stamp(e)+':00').getTime();
-function reset(){ $('form').reset();$('date').value=localDate(now());$('time').value=localTime(now());$('status').textContent='新しい記録を入力できます。';}
+function reset(){ const openedAt=now(); $('form').reset();$('date').value=localDate(openedAt);$('time').value=localTime(openedAt);$('status').textContent='新しい記録を入力できます。';}
 reset();let mode='weight';
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(entries));return true}catch{alert('保存できませんでした。ブラウザの保存領域をご確認ください。');return false}}
 function render(){const s=sorted(),w=s.filter(e=>num(e.weight)),m=s.filter(e=>num(e.mood));
